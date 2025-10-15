@@ -5,14 +5,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A85LABS Mirror</title>
-  <link rel="icon" href="https://raw.githubusercontent.com/A85LABS/Asset/refs/heads/main/image/A85LABS_LOGO.svg"
-    type="image/svg+xml" />
+  <link rel="icon" href="https://cdn.a85labs.net/A85LABS_LOGO.svg" type="image/svg+xml" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    @font-face {
+      font-family: "Pretendard Variable";
+      src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/variable/pretendardvariable-dynamic-subset.css");
+      font-display: swap;
+    }
+
     body {
-      font-family: "Noto Sans KR", sans-serif;
+      font-family: "Pretendard Variable", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .distro-card {
@@ -24,45 +30,58 @@
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
         0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
+
+    /* Custom Accent Color */
+    .accent-bg {
+      background-color: #aaaaff;
+    }
+
+    .accent-bg-hover:hover {
+      background-color: #9999f5;
+    }
+
+    .accent-text {
+      color: #aaaaff;
+    }
   </style>
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-  <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+<body class="bg-slate-900 text-slate-300 flex flex-col min-h-screen">
+  <div class="container mx-auto p-4 sm:p-6 lg:p-8 flex flex-col min-h-screen">
     <!-- 헤더 -->
-    <header class="flex justify-between items-center mb-8">
+    <header class="w-full max-w-6xl mx-auto flex justify-between items-center py-4 mb-8">
       <div class="flex items-center">
-        <img src="https://raw.githubusercontent.com/A85LABS/Asset/refs/heads/main/image/A85LABS_LOGO.svg"
-          alt="A85LABS Logo" class="h-12 mr-4" />
+        <img src="https://cdn.a85labs.net/A85LABS_LOGO.svg" alt="A85LABS Logo" class="h-12 mr-4" />
         <div>
-          <h1 class="text-3xl sm:text-4xl font-bold text-blue-600 dark:text-blue-400">
+          <h1 class="text-3xl sm:text-4xl font-black tracking-tighter text-white">
             A85LABS Mirror
           </h1>
-          <p class="text-gray-600 dark:text-gray-400 mt-1">
+          <p class="text-slate-400 mt-1">
             대한민국 사용자들을 위한 빠르고 안정적인 미러
           </p>
         </div>
       </div>
-      <button id="theme-toggle"
-        class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none">
-        <i data-lucide="sun" class="h-6 w-6 hidden dark:block"></i>
-        <i data-lucide="moon" class="h-6 w-6 block dark:hidden"></i>
-      </button>
     </header>
 
-    <!-- 검색 및 정보 -->
-    <div class="mb-8">
-      <input type="text" id="search-box" placeholder="배포판 이름으로 검색... (예: Ubuntu)"
-        class="w-full p-4 text-lg bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" />
+    <!-- 스폰서 안내 -->
+    <div class="mb-8 bg-slate-800/80 border border-slate-700 rounded-lg p-6 shadow-lg">
+      <div class="flex items-center justify-center">
+        <div class="text-center">
+          <p class="text-lg text-slate-400 mb-3">스폰서</p>
+          <h3 class="text-2xl font-bold text-white mb-4">PROJECT ELIV</h3>
+          <img src="https://eliv.speedycdn.net/eliv/Assets/Images/Logo/WHITE.svg" alt="PROJECT ELIV Logo"
+            class="h-16 mx-auto" />
+        </div>
+      </div>
     </div>
 
     <!-- 배포판 목록 -->
-    <main>
-      <h2 class="text-2xl font-semibold mb-6">주요 배포판</h2>
+    <main class="flex-1">
+      <h2 class="text-2xl font-bold text-white mb-6">주요 배포판</h2>
       <div id="distro-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- 배포판 카드는 JavaScript로 동적 생성됩니다 -->
       </div>
-      <p id="no-results" class="text-center text-gray-500 dark:text-gray-400 py-10 text-lg hidden">
+      <p id="no-results" class="text-center text-slate-500 py-10 text-lg hidden">
         검색 결과가 없습니다.
       </p>
     </main>
@@ -79,66 +98,37 @@
     </div>
 
     <!-- 서버 정보 -->
-    <section class="mt-12 bg-gray-200 dark:bg-gray-800 p-6 rounded-lg">
-      <h2 class="text-2xl font-semibold mb-4 text-center">미러 서버 정보</h2>
+    <section class="mt-12 bg-slate-800/80 border border-slate-700 p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold mb-4 text-center text-white">미러 서버 정보</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
         <div>
-          <h3 class="font-bold text-lg text-blue-600 dark:text-blue-400">
+          <h3 class="font-bold text-lg accent-text mb-2">
             서버 위치
           </h3>
-          <p>대한민국, 경기도, 시흥시 (Siheung-si, Gyeonggi-do, Korea)</p>
+          <p class="text-slate-300">대한민국, 경기도, 시흥시 (Siheung-si, Gyeonggi-do, Korea)</p>
         </div>
         <div>
-          <h3 class="font-bold text-lg text-blue-600 dark:text-blue-400">
+          <h3 class="font-bold text-lg accent-text mb-2">
             네트워크
           </h3>
-          <p>LGU+ 대칭형 500 Mbps</p>
+          <p class="text-slate-300">LGU+ 대칭형 500 Mbps</p>
         </div>
         <div>
-          <h3 class="font-bold text-lg text-blue-600 dark:text-blue-400">
+          <h3 class="font-bold text-lg accent-text mb-2">
             문의
           </h3>
-          <p>me@nergis.dev</p>
+          <p class="text-slate-300">me@nergis.dev</p>
         </div>
       </div>
     </section>
 
     <!-- 푸터 -->
-    <footer class="text-center mt-12 text-gray-500 dark:text-gray-400">
-      <p>&copy; 2025 A85LABS. All rights reserved.</p>
+    <footer class="w-full max-w-6xl mx-auto text-center py-6 mt-12">
+      <p class="text-sm text-slate-500">&copy; 2025 A85LABS. All rights reserved.</p>
     </footer>
   </div>
 
   <script>
-    // 테마 토글 기능
-    const themeToggle = document.getElementById("theme-toggle");
-    const htmlEl = document.documentElement;
-
-    themeToggle.addEventListener("click", () => {
-      htmlEl.classList.toggle("dark");
-      localStorage.setItem(
-        "theme",
-        htmlEl.classList.contains("dark") ? "dark" : "light"
-      );
-      // NOTE: 클릭 시에는 아이콘을 다시 렌더링할 필요가 없습니다.
-      // CSS가 'dark' 클래스에 따라 자동으로 아이콘 표시를 전환합니다.
-    });
-
-    // 페이지 로드 시 저장된 테마 적용
-    function applyInitialTheme() {
-      if (
-        localStorage.getItem("theme") === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        htmlEl.classList.add("dark");
-      } else {
-        htmlEl.classList.remove("dark");
-      }
-      // 정적 아이콘 초기화
-      lucide.createIcons();
-    }
-
     // 배포판 데이터
     const distros = [
       {
@@ -176,61 +166,54 @@
     ];
 
     const distroList = document.getElementById("distro-list");
-    const searchBox = document.getElementById("search-box");
     const noResults = document.getElementById("no-results");
 
     // 배포판 카드를 렌더링하는 함수
-    function renderDistros(filter = "") {
+    function renderDistros() {
       distroList.innerHTML = "";
-      const lowerCaseFilter = filter.toLowerCase();
-      let found = false;
 
       distros.forEach((distro) => {
-        if (distro.name.toLowerCase().includes(lowerCaseFilter)) {
-          found = true;
-          const card = document.createElement("div");
-          card.className =
-            "distro-card bg-white dark:bg-gray-800 rounded-lg p-5 shadow-md flex flex-col";
+        const card = document.createElement("div");
+        card.className =
+          "distro-card bg-slate-800/80 border border-slate-700 rounded-lg p-5 shadow-lg flex flex-col";
 
-          // Determine the sync status text based on the 'proxy' property
-          const syncStatusText = distro.proxy
-            ? `${distro.lastSync}에서 프록싱`
-            : `동기화 주기: ${distro.lastSync}`;
+        // Determine the sync status text based on the 'proxy' property
+        const syncStatusText = distro.proxy
+          ? `${distro.lastSync}에서 프록싱`
+          : `동기화 주기: ${distro.lastSync}`;
 
-          card.innerHTML = `
+        card.innerHTML = `
                 <div class="flex items-center mb-4">
                     <img src="${distro.icon}" alt="${distro.name
-            } 로고" class="h-10 w-10 mr-4 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="h-10 w-10 mr-4 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-lg font-bold hidden">${distro.name.charAt(
-              0
-            )}</div>
+          } 로고" class="h-10 w-10 mr-4 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                    <div class="h-10 w-10 mr-4 rounded-full bg-slate-700 flex items-center justify-center text-lg font-bold text-white hidden">${distro.name.charAt(
+            0
+          )}</div>
                     <div>
-                        <h3 class="text-xl font-bold">${distro.name}</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">${distro.version
-            }</p>
+                        <h3 class="text-xl font-bold text-white">${distro.name}</h3>
+                        <p class="text-sm text-slate-400">${distro.version
+          }</p>
                     </div>
                 </div>
                 <div class="mt-auto">
-                    <div class="text-xs text-gray-500 dark:text-gray-400 mb-3">
+                    <div class="text-xs text-slate-400 mb-3">
                         <i data-lucide="clock" class="inline-block h-3 w-3 mr-1"></i>
                         ${syncStatusText}
                     </div>
                     <a href="${distro.url
-            }" class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+          }" class="block w-full text-center accent-bg accent-bg-hover text-slate-900 py-2 rounded-lg transition-colors font-semibold">
                         파일 보기
                     </a>
                 </div>
             `;
-          distroList.appendChild(card);
-        }
+        distroList.appendChild(card);
       });
 
-      noResults.style.display = found ? "none" : "block";
       lucide.createIcons();
     }
 
     // --- 초기 실행 ---
-    applyInitialTheme();
+    lucide.createIcons();
     renderDistros();
   </script>
 </body>
