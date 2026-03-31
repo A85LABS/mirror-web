@@ -1,280 +1,429 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A85LABS - MIRROR</title>
+    <link
+      rel="icon"
+      href="https://cdn.a85labs.net/A85LABS_LOGO.svg"
+      type="image/svg+xml"
+    />
+    <style>
+      @font-face {
+        font-family: "Pretendard Variable";
+        src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/variable/pretendardvariable-dynamic-subset.css");
+        font-display: swap;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A85LABS - MIRROR</title>
-  <link rel="icon" href="https://cdn.a85labs.net/A85LABS_LOGO.svg" type="image/svg+xml" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    @font-face {
-      font-family: "Pretendard Variable";
-      src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/variable/pretendardvariable-dynamic-subset.css");
-      font-display: swap;
-    }
+      body {
+        font-family:
+          "Pretendard Variable",
+          -apple-system,
+          BlinkMacSystemFont,
+          system-ui,
+          Roboto,
+          "Helvetica Neue",
+          sans-serif;
+        background-color: #111;
+        color: #eee;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        line-height: 1.5;
+      }
+      h1,
+      h2,
+      h3 {
+        margin-top: 0;
+      }
+      a {
+        color: #aaaaff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
 
-    body {
-      font-family: "Pretendard Variable", "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 1px dashed #444;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+      }
+      .header-titles {
+        display: flex;
+        flex-direction: column;
+      }
+      .header-titles h1 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0;
+        font-size: 1.8rem;
+      }
+      .header-titles img {
+        height: 28px;
+      }
+      .header-titles p {
+        margin: 0;
+        margin-top: 0.2rem;
+        color: #aaa;
+      }
+      .header-guidelines {
+        text-align: right;
+        font-size: 0.85rem;
+      }
+      .header-guidelines ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
 
-    .distro-card {
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
+      .sponsor-box {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #333;
+        background: #000;
+        text-align: center;
+      }
+      .sponsor-box p {
+        color: #aaa;
+        font-size: 0.9rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      .sponsor-box img {
+        height: 40px;
+      }
 
-    .distro-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
+      .main-content {
+        margin-top: 2rem;
+      }
 
-    /* Custom Accent Color */
-    .accent-bg {
-      background-color: #aaaaff;
-    }
+      .distros-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+      }
 
-    .accent-bg-hover:hover {
-      background-color: #9999f5;
-    }
+      .distro-card {
+        background: #000;
+        border: 1px solid #333;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+      }
+      .distro-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .distro-header img {
+        height: 32px;
+        width: 32px;
+        object-fit: contain;
+        margin-right: 1rem;
+      }
+      .distro-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #fff;
+      }
+      .distro-header p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+      .distro-info {
+        margin-top: auto;
+        font-size: 0.8rem;
+        color: #aaa;
+        margin-bottom: 1rem;
+      }
+      .distro-btn {
+        display: block;
+        text-align: center;
+        background: #222;
+        border: 1px solid #444;
+        color: #eee;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      .distro-btn:hover {
+        background: #444;
+        text-decoration: none;
+      }
+      .distro-btn.inactive {
+        color: #888;
+        cursor: not-allowed;
+      }
+      .distro-btn.inactive:hover {
+        background: #222;
+      }
+      .distro-btn.active {
+        background: #aaaaff;
+        color: #111;
+        border-color: #aaaaff;
+        font-weight: bold;
+      }
+      .distro-btn.active:hover {
+        background: #9999f5;
+      }
 
-    .accent-text {
-      color: #aaaaff;
-    }
-  </style>
+      .banner {
+        margin: 2rem 0;
+        display: block;
+      }
+      .banner img {
+        width: 100%;
+        border: 1px solid #333;
+      }
 
-  <meta name="color-scheme" content="dark">
-  <meta content="대한민국 사용자들을 위한 빠르고 안정적인 미러. - MIRROR.A85LABS.NET" name="description" />
-  <meta
-    content="A85LABS, A85LABS Mirror, 미러, Mirror, 대한민국 미러, Korea Mirror, Arch Linux, Debian, Proxmox, Termux, ROKFOSS, rokfoss, 록포스"
-    name="keywords" />
-  <meta content="A85LABS" name="author" />
-  <meta name="theme-color" content="#aaaaff">
+      .server-info {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #333;
+      }
+      .server-info h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+      .info-item h3 {
+        font-size: 1rem;
+        color: #aaaaff;
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+      }
+      .info-item p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #ccc;
+      }
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="A85LABS - MIRROR" />
-  <meta property="og:description" content="대한민국 사용자들을 위한 빠르고 안정적인 미러. - " />
-  <meta property="og:url" content="https://MIRROR.A85LABS.NET" />
-  <meta property="og:site_name" content="MIRROR.A85LABS.NET" />
-  <meta property="og:locale" content="ko_KR" />
+      .footer {
+        margin-top: 3rem;
+        font-size: 0.8rem;
+        color: #666;
+        border-top: 1px solid #333;
+        padding-top: 1rem;
+        text-align: center;
+      }
+    </style>
 
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="A85LABS - MIRROR" />
-  <meta name="twitter:description" content="대한민국 사용자들을 위한 빠르고 안정적인 미러. - MIRROR.A85LABS.NET" />
-</head>
-
-<body class="bg-slate-900 text-slate-300 flex flex-col min-h-screen">
-  <div class="container mx-auto p-4 sm:p-6 lg:p-8 flex flex-col min-h-screen">
-    <!-- 헤더 -->
-    <header class="w-full max-w-6xl mx-auto flex justify-between items-center py-4 mb-8">
-      <div class="flex items-center">
-        <img src="https://cdn.a85labs.net/A85LABS_LOGO.svg" alt="A85LABS Logo" class="h-12 mr-4" />
-        <div>
-          <h1 class="text-3xl sm:text-4xl font-black tracking-tighter text-white">
-            A85LABS Mirror
-          </h1>
-          <p class="text-slate-400 mt-1">
-            대한민국 사용자들을 위한 빠르고 안정적인 미러
-          </p>
-        </div>
+    <meta name="color-scheme" content="dark" />
+    <meta
+      content="대한민국 사용자들을 위한 빠르고 안정적인 미러. - MIRROR.A85LABS.NET"
+      name="description"
+    />
+    <meta
+      content="A85LABS, A85LABS Mirror, 미러, Mirror, 대한민국 미러, Korea Mirror, Arch Linux, Debian, Proxmox, Termux, ROKFOSS, rokfoss, 록포스"
+      name="keywords"
+    />
+    <meta content="A85LABS" name="author" />
+    <meta name="theme-color" content="#111111" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="A85LABS - MIRROR" />
+    <meta
+      property="og:description"
+      content="대한민국 사용자들을 위한 빠르고 안정적인 미러. - "
+    />
+    <meta property="og:url" content="https://MIRROR.A85LABS.NET" />
+    <meta property="og:site_name" content="MIRROR.A85LABS.NET" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="A85LABS - MIRROR" />
+    <meta
+      name="twitter:description"
+      content="대한민국 사용자들을 위한 빠르고 안정적인 미러. - MIRROR.A85LABS.NET"
+    />
+  </head>
+  <body>
+    <div class="header-container">
+      <div class="header-titles">
+        <h1>
+          <img
+            src="https://cdn.a85labs.net/A85LABS_LOGO.svg"
+            alt="A85LABS Logo"
+          />
+          A85LABS Mirror
+        </h1>
+        <p>대한민국 사용자들을 위한 빠르고 안정적인 미러</p>
       </div>
-      <div>
-        <a href="https://github.com/sponsors/DevNergis" target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 accent-bg accent-bg-hover text-slate-900 px-6 py-2.5 rounded-lg transition-colors font-semibold hover:shadow-lg">
-          <i data-lucide="heart" class="h-5 w-5"></i>
-          <span>기부하기</span>
-        </a>
-      </div>
-    </header>
-
-    <!-- 스폰서 안내 -->
-    <div class="mb-8 bg-slate-800/80 border border-slate-700 rounded-lg p-6 shadow-lg">
-      <div class="flex items-center justify-center">
-        <div class="text-center">
-          <p class="text-lg text-slate-400 mb-3">스폰서</p>
-          <h3 class="text-2xl font-bold text-white mb-4">PROJECT ELIV</h3>
-          <a href="https://eliv.kr" target="_blank" rel="noopener noreferrer">
-            <img src="https://eliv.speedycdn.net/eliv/Assets/Images/Logo/WHITE.svg" alt="PROJECT ELIV Logo"
-              class="h-16 mx-auto" />
-          </a>
-        </div>
+      <div class="header-guidelines">
+        <ul>
+          <li>
+            <a
+              href="https://github.com/sponsors/DevNergis"
+              target="_blank"
+              rel="noopener noreferrer"
+              >♥ 기부하기</a
+            >
+          </li>
+        </ul>
       </div>
     </div>
 
-    <!-- 배포판 목록 -->
-    <main class="flex-1">
-      <h2 class="text-2xl font-bold text-white mb-6">주요 배포판</h2>
-      <div id="distro-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- 배포판 카드는 JavaScript로 동적 생성됩니다 -->
-      </div>
-      <p id="no-results" class="text-center text-slate-500 py-10 text-lg hidden">
-        검색 결과가 없습니다.
-      </p>
-    </main>
-
-    <!-- ROKFOSS SPIN LOGO Banner -->
-    <div class="my-8">
-      <a href="https://krfoss.org" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.a85labs.net/ROKFOSS/ROKFOSS_SPIN_LOGO.svg" alt="ROKFOSS SPIN LOGO Banner"
-          class="w-full rounded-lg shadow-lg cursor-pointer hover:opacity-90 transition-opacity" />
+    <div class="sponsor-box">
+      <p>스폰서</p>
+      <a href="https://eliv.kr" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://eliv.speedycdn.net/eliv/Assets/Images/Logo/WHITE.svg"
+          alt="PROJECT ELIV Logo"
+        />
       </a>
     </div>
 
-    <!-- 서버 정보 -->
-    <section class="mt-12 bg-slate-800/80 border border-slate-700 p-6 rounded-lg shadow-lg">
-      <h2 class="text-2xl font-bold mb-4 text-center text-white">미러 서버 정보</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-        <div>
-          <h3 class="font-bold text-lg accent-text mb-2">
-            서버 위치
-          </h3>
-          <p class="text-slate-300">대한민국, 경기도, 시흥시 (Siheung-si, Gyeonggi-do, Korea)</p>
+    <div class="main-content">
+      <h2>주요 배포판</h2>
+      <div id="distro-list" class="distros-grid">
+        <!-- JavaScript renders this -->
+      </div>
+      <p id="no-results" style="display: none">검색 결과가 없습니다.</p>
+    </div>
+
+    <a
+      class="banner"
+      href="https://krfoss.org"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img
+        src="https://cdn.a85labs.net/ROKFOSS/ROKFOSS_SPIN_LOGO.svg"
+        alt="ROKFOSS SPIN LOGO Banner"
+      />
+    </a>
+
+    <div class="server-info">
+      <h2>미러 서버 정보</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <h3>서버 위치</h3>
+          <p>대한민국, 경기도, 시흥시<br />(Siheung-si, Gyeonggi-do, Korea)</p>
         </div>
-        <div>
-          <h3 class="font-bold text-lg accent-text mb-2">
-            네트워크
-          </h3>
-          <p class="text-slate-300">LGU+ 대칭형 500 Mbps</p>
+        <div class="info-item">
+          <h3>네트워크</h3>
+          <p>LGU+ 대칭형 500 Mbps</p>
         </div>
-        <div>
-          <h3 class="font-bold text-lg accent-text mb-2">
-            문의
-          </h3>
-          <p class="text-slate-300">me@nergis.dev</p>
+        <div class="info-item">
+          <h3>문의</h3>
+          <p>me@nergis.dev</p>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 푸터 -->
-    <footer class="w-full max-w-6xl mx-auto text-center py-6 mt-12">
-      <p class="text-sm text-slate-500">&copy; 2025 A85LABS. All rights reserved.</p>
-    </footer>
-  </div>
+    <div class="footer">
+      <p>&copy; 2025 A85LABS. All rights reserved.</p>
+    </div>
 
-  <script>
-    // 배포판 데이터
-    const distros = [
-      {
-        name: "Arch Linux",
-        version: "Packages & ISO",
-        url: "/archlinux/",
-        icon: "https://cdn.a85labs.net/LOGO/archlinux-512.png",
-        lastSync: "3시간",
-        proxy: false,
-      },
-      {
-        name: "Debian",
-        version: "Packages",
-        url: "/debian",
-        icon: "https://cdn.a85labs.net/LOGO/debian-logo-1024x576.png",
-        lastSync: "3시간",
-        proxy: false,
-        inactive: true,
-      },
-      {
-        name: "Debian Security",
-        version: "Packages",
-        url: "/debian-security",
-        icon: "https://cdn.a85labs.net/LOGO/debian-logo-1024x576.png",
-        lastSync: "3시간",
-        proxy: false,
-        inactive: true,
-      },
-      {
-        name: "OPNsense",
-        version: "Packages & ISO",
-        url: "/opnsense",
-        icon: "https://cdn.a85labs.net/LOGO/OPNsense_verticaal.svg",
-        lastSync: "3시간",
-        proxy: false,
-      },
-      {
-        name: "Proxmox",
-        version: "Packages & ISO",
-        url: "/proxmox/",
-        icon: "https://cdn.a85labs.net/LOGO/proxmox-logo-stacked-color.svg",
-        lastSync: "3시간",
-        proxy: false,
-      },
-      {
-        name: "PuTTY",
-        version: "Packages",
-        url: "/putty",
-        icon: "https://cdn.a85labs.net/LOGO/putty.ico",
-        lastSync: "3시간",
-        proxy: false,
-      },
-      {
-        name: "Termux",
-        version: "Packages",
-        url: "/termux",
-        icon: "https://cdn.a85labs.net/LOGO/termux.ico",
-        lastSync: "3시간",
-        proxy: false,
-      },
-    ];
+    <script>
+      const distros = [
+        {
+          name: "Arch Linux",
+          version: "Packages & ISO",
+          url: "/archlinux/",
+          icon: "https://cdn.a85labs.net/LOGO/archlinux-512.png",
+          lastSync: "3시간",
+          proxy: false,
+        },
+        {
+          name: "Debian",
+          version: "Packages",
+          url: "/debian",
+          icon: "https://cdn.a85labs.net/LOGO/debian-logo-1024x576.png",
+          lastSync: "3시간",
+          proxy: false,
+          inactive: true,
+        },
+        {
+          name: "Debian Security",
+          version: "Packages",
+          url: "/debian-security",
+          icon: "https://cdn.a85labs.net/LOGO/debian-logo-1024x576.png",
+          lastSync: "3시간",
+          proxy: false,
+          inactive: true,
+        },
+        {
+          name: "OPNsense",
+          version: "Packages & ISO",
+          url: "/opnsense",
+          icon: "https://cdn.a85labs.net/LOGO/OPNsense_verticaal.svg",
+          lastSync: "3시간",
+          proxy: false,
+        },
+        {
+          name: "Proxmox",
+          version: "Packages & ISO",
+          url: "/proxmox/",
+          icon: "https://cdn.a85labs.net/LOGO/proxmox-logo-stacked-color.svg",
+          lastSync: "3시간",
+          proxy: false,
+        },
+        {
+          name: "PuTTY",
+          version: "Packages",
+          url: "/putty",
+          icon: "https://cdn.a85labs.net/LOGO/putty.ico",
+          lastSync: "3시간",
+          proxy: false,
+        },
+        {
+          name: "Termux",
+          version: "Packages",
+          url: "/termux",
+          icon: "https://cdn.a85labs.net/LOGO/termux.ico",
+          lastSync: "3시간",
+          proxy: false,
+        },
+      ];
 
-    const distroList = document.getElementById("distro-list");
-    const noResults = document.getElementById("no-results");
+      const distroList = document.getElementById("distro-list");
 
-    // 배포판 카드를 렌더링하는 함수
-    function renderDistros() {
-      distroList.innerHTML = "";
+      function renderDistros() {
+        distroList.innerHTML = "";
+        distros.forEach((distro) => {
+          const syncStatusText = distro.proxy
+            ? `${distro.lastSync}에서 프록싱`
+            : `동기화 주기: ${distro.lastSync}`;
 
-      distros.forEach((distro) => {
-        const card = document.createElement("div");
-        card.className =
-          "distro-card bg-slate-800/80 border border-slate-700 rounded-lg p-5 shadow-lg flex flex-col";
+          const isInactive = distro.inactive === true;
+          const buttonClass = isInactive
+            ? "distro-btn inactive"
+            : "distro-btn active";
+          const buttonText = isInactive ? "비활성화됨" : "파일 보기";
+          const buttonHref = isInactive ? "javascript:void(0)" : distro.url;
 
-        // Determine the sync status text based on the 'proxy' property
-        const syncStatusText = distro.proxy
-          ? `${distro.lastSync}에서 프록싱`
-          : `동기화 주기: ${distro.lastSync}`;
-
-        const isInactive = distro.inactive === true;
-        const buttonClass = isInactive
-          ? "bg-slate-700 text-slate-500 cursor-not-allowed"
-          : "accent-bg accent-bg-hover text-slate-900";
-        const buttonText = isInactive ? "비활성화됨" : "파일 보기";
-        const buttonHref = isInactive ? "javascript:void(0)" : distro.url;
-
-        card.innerHTML = `
-                <div class="flex items-center mb-4">
-                    <img src="${distro.icon}" alt="${distro.name
-          } 로고" class="h-10 w-10 mr-4 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                    <div class="h-10 w-10 mr-4 rounded-full bg-slate-700 flex items-center justify-center text-lg font-bold text-white hidden">${distro.name.charAt(
-            0
-          )}</div>
-                    <div>
-                        <h3 class="text-xl font-bold text-white">${distro.name}</h3>
-                        <p class="text-sm text-slate-400">${distro.version
-          }</p>
+          const card = document.createElement("div");
+          card.className = "distro-card";
+          card.innerHTML = `
+                    <div class="distro-header">
+                        <img src="${distro.icon}" alt="${distro.name} 로고" onerror="this.style.display='none';">
+                        <div>
+                            <h3>${distro.name}</h3>
+                            <p>${distro.version}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="mt-auto">
-                    <div class="text-xs text-slate-400 mb-3">
-                        <i data-lucide="clock" class="inline-block h-3 w-3 mr-1"></i>
+                    <div class="distro-info">
                         ${syncStatusText}
                     </div>
-                    <a href="${buttonHref}" class="block w-full text-center ${buttonClass} py-2 rounded-lg transition-colors font-semibold">
+                    <a href="${buttonHref}" class="${buttonClass}">
                         ${buttonText}
                     </a>
-                </div>
-            `;
-        distroList.appendChild(card);
-      });
+                `;
+          distroList.appendChild(card);
+        });
+      }
 
-      lucide.createIcons();
-    }
-
-    // --- 초기 실행 ---
-    lucide.createIcons();
-    renderDistros();
-  </script>
-</body>
-
+      renderDistros();
+    </script>
+  </body>
 </html>
